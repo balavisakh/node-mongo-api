@@ -32,9 +32,10 @@ router.route('/adduser').post((req,res) => {
 router.route('/updateuser/:id').put((req,res) => {
     userModel.findById(req.params.id, (err,user) => {
         try {
+            user.position = req.body.position;
             user.name = req.body.name;
             user.age = req.body.age;
-            user.phone = req.body.phone;
+            user.phonenumber = req.body.phone;
             user.save().then(() => {
             res.status(200).json({'user':'user detail updated'});
             });

@@ -8,6 +8,15 @@ const bodyparser = require('body-parser');
 const userController = require('./controllers/user');
 const { json } = require('body-parser');
 
+//for avoiding cors error
+const middleware = ((req,res,next)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Header", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS");
+    next();
+});
+applicaton.use(middleware);
+
 //parses the JSON, buffer, string and URL encoded data submitted using HTTP POST request
 applicaton.use(bodyparser.urlencoded({
     extended: true
