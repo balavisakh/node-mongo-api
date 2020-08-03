@@ -9,5 +9,3 @@ mongoose.connect("mongodb://localhost:27017/users",{ useNewUrlParser: true }, (e
         console.log("db connection failed");
     }
 });
-
-const user = require('./user.model');

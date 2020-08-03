@@ -28,6 +28,19 @@ router.route('/adduser').post((req,res) => {
     }
 });
 
+// Get userdetails by id
+router.route('/edituser/:id').get((req,res) => {
+    let id = req.params.id;
+    userModel.findById(id, (err, user) => {
+        try {
+            res.json(user);
+        }
+        catch {
+            res.send('error', err);
+        }
+    });
+})
+
 // Update user details in mongodb
 router.route('/updateuser/:id').put((req,res) => {
     userModel.findById(req.params.id, (err,user) => {
@@ -35,7 +48,7 @@ router.route('/updateuser/:id').put((req,res) => {
             user.position = req.body.position;
             user.name = req.body.name;
             user.age = req.body.age;
-            user.phonenumber = req.body.phone;
+            user.phonenumber = req.body.phonenumber;
             user.save().then(() => {
             res.status(200).json({'user':'user detail updated'});
             });
@@ -48,15 +61,15 @@ router.route('/updateuser/:id').put((req,res) => {
 
 // Delete user in mongodb
 router.route('/deleteuser/:id').delete((req,res) => {
-    userModel.findByIdAndRemove({ _id: req.params.id }, (err,user) => {
+    userModel.findByIdAndRemove(req.params.id , (err,user) => {
         try {
             res.status(200).json({'user': 'user deleted'});
         }
         catch {
             res.send('failed', err);
         }
-    })
-})
+    });
+});
 
 // exporting this file so we can use is it in another file
 module.exports = router;

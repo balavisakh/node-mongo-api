@@ -3,16 +3,16 @@ const mongoose = require("mongoose");
 
 var userSchema = new mongoose.Schema({
     position: {
-        type: String
+        type: Number
     },
     name: {
-        type: String,
+        type: String
     },
     age: {
-        type: String,
+        type: Number
     },
     phonenumber: {
-        type: String,
+        type: Number
     }
 });
 
