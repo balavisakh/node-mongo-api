@@ -45,9 +45,11 @@ router.route('/edituser/:id').get((req,res) => {
 router.route('/updateuser/:id').put((req,res) => {
     userModel.findById(req.params.id, (err,user) => {
         try {
-            user.position = req.body.position;
-            user.name = req.body.name;
+            user.firstname = req.body.firstname;
+            user.lastname = req.body.lastname;
+            user.password = req.body.password;
             user.age = req.body.age;
+            user.email = req.body.email;
             user.phonenumber = req.body.phonenumber;
             user.save().then(() => {
             res.status(200).json({'user':'user detail updated'});
